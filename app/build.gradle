@@ -4,13 +4,13 @@ apply plugin: 'kotlin-android-extensions'
 apply from:"../config.gradle"
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.1"
+    compileSdkVersion rootProject.ext.config["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.config["buildToolsVersion"]
 
     defaultConfig {
         applicationId "com.fxj.androidfastmonitordemo01"
-        minSdkVersion 16
-        targetSdkVersion 30
+        minSdkVersion rootProject.ext.config["minSdkVersion"]
+        targetSdkVersion rootProject.ext.config["targetSdkVersion"]
         versionCode 1
         versionName "1.0"
 
