@@ -30,12 +30,12 @@ class FpsMonitor private constructor(){
     }
 
     fun startFpsMonitor(){
-        Choreographer.getInstance().postFrameCallback {frameRateRunnable}
+        Choreographer.getInstance().postFrameCallback (frameRateRunnable)
         this.mMainHandler.postDelayed(frameRateRunnable, FPS_SAMPLING_TIME)
     }
 
     fun stopFpsMonitor(){
-        Choreographer.getInstance().removeFrameCallback { frameRateRunnable }
+        Choreographer.getInstance().removeFrameCallback (frameRateRunnable )
         this.mMainHandler.removeCallbacks(frameRateRunnable)
     }
 
@@ -50,16 +50,18 @@ class FpsMonitor private constructor(){
                 mLastFrameRate= MAX_FRAME_RATE
             }
 
-            /*在此可以进行FPS帧率数据保存操作*/
+            /*在此可以进行FPS帧率数据保存操作  start*/
 
+            /*在此可以进行FPS帧率数据保存操作  end*/
 
+            totalFramePerSecond=0/*更新完最后一帧帧率mLastFrameRate之后将totalFramePerSecond重置为0*/
             mMainHandler.postDelayed(this, FPS_SAMPLING_TIME)/*1s统计一次FPS帧率*/
         }
 
         override fun doFrame(frameTimeNanos: Long) {
             totalFramePerSecond++
             Log.d(TAG,"##doFrame##frameTimeNanos=${frameTimeNanos},totalFramePerSecond=${totalFramePerSecond}")
-            Choreographer.getInstance().postFrameCallback { this}
+            Choreographer.getInstance().postFrameCallback (this)
         }
     }
 }
