@@ -1,12 +1,11 @@
 package com.fxj.androidfastmonitordemo01
 
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.fxj.fastmonitor.fpsmonitor.FpsMonitor
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : Activity() {
     companion object{
         val TAG:String= MainActivity::class.java.simpleName
     }
