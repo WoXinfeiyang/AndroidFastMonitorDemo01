@@ -26,7 +26,7 @@ class FpsMonitor private constructor(){
         val MAX_FRAME_RATE:Int=60
 
         /**FPS采样时间*/
-        val FPS_SAMPLING_TIME:Long=10
+        val FPS_SAMPLING_TIME:Long=1000
     }
 
     fun startFpsMonitor(){
@@ -44,6 +44,7 @@ class FpsMonitor private constructor(){
         val TAG:String=FrameRateRunnable::class.java.simpleName
 
         override fun run() {
+            Log.d(TAG,"##run##mLastFrameRate=${mLastFrameRate},totalFramePerSecond=${totalFramePerSecond}")
             mLastFrameRate=totalFramePerSecond
             if(mLastFrameRate>FpsMonitor.MAX_FRAME_RATE){
                 mLastFrameRate= MAX_FRAME_RATE
