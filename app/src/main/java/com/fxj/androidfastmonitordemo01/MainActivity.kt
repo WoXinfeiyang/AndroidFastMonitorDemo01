@@ -3,6 +3,7 @@ package com.fxj.androidfastmonitordemo01
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import com.fxj.fastmonitor.blockmonitor.core.BlockMonitor
 import com.fxj.fastmonitor.fpsmonitor.FpsMonitor
 
 class MainActivity : Activity() {
@@ -14,11 +15,15 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         FpsMonitor.instance.startFpsMonitor()
+
+        BlockMonitor.instance.start()
     }
 
     override fun onDestroy() {
         Log.d(TAG,"##onDestroy##")
         super.onDestroy()
         FpsMonitor.instance.stopFpsMonitor()
+
+        BlockMonitor.instance.stop()
     }
 }
