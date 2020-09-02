@@ -23,7 +23,7 @@ class FpsMonitor private constructor(){
         }
 
         /**最大帧率*/
-        val MAX_FRAME_RATE:Int=60
+        val MAX_FRAME_RATE:Int=120
 
         /**FPS采样时间*/
         val FPS_SAMPLING_TIME:Long=1000
