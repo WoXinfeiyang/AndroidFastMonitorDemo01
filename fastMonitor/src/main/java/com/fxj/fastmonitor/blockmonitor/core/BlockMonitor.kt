@@ -21,6 +21,7 @@ class BlockMonitor private constructor(){
      * */
     private var mIsRunning:Boolean=false
 
+    var mBlockPrinter:BlockPrinter?=null
 
     fun start(){
         if(mIsRunning){
@@ -28,13 +29,12 @@ class BlockMonitor private constructor(){
             return
         }
 
-        this.mIsRunning=true
-        Looper.getMainLooper().setMessageLogging(object : Printer{
-            override fun println(msg: String?) {
-                Log.d(TAG,"##MessageLogging Printer.println##msg=${msg},currentTimeMillis=${System.currentTimeMillis()}")
-            }
+        if(this.mBlockPrinter==null){
+            this.mBlockPrinter=BlockPrinter()
+        }
 
-        })
+        this.mIsRunning=true
+        Looper.getMainLooper().setMessageLogging(this.mBlockPrinter)
     }
 
     fun stop(){
@@ -43,6 +43,9 @@ class BlockMonitor private constructor(){
             return
         }
         Looper.getMainLooper().setMessageLogging(null)
+        if(this.mBlockPrinter!=null){
+            this.mBlockPrinter=null
+        }
 
         this.mIsRunning=false
     }
