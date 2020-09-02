@@ -24,9 +24,12 @@ class BlockPrinter:Printer {
      * */
     var mBlockThresholdMillis:Int?=null
 
+    var mStackSampler:StackSampler?=null
     /**主构造函数*/
     init {
         Log.d(TAG,"##init##主构造函数")
+        this.mStackSampler= StackSampler()
+        this.mStackSampler?.init()
     }
 
     constructor(blockThreasholderMillis:Int= DEFAULT_BLOCK_THRESHOLD_MILLIS){
@@ -37,7 +40,7 @@ class BlockPrinter:Printer {
         Log.d(TAG,"##BlockPrinter.println##msg=${msg},mBlockThresholdMillis=${this.mBlockThresholdMillis}")
 
         if(!this.mPrinterStart){
-            var mStartTime= System.currentTimeMillis()
+            this.mStartTime= System.currentTimeMillis()
             this.mPrinterStart=true
         }else{
 
