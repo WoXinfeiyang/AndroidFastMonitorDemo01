@@ -43,9 +43,33 @@ class BlockPrinter:Printer {
         if(!this.mPrinterStart){
             this.mStartTime= System.currentTimeMillis()
             this.mPrinterStart=true
+            this.mStackSampler?.startDump()
         }else{
-
+            val endTime:Long=System.currentTimeMillis()
             this.mPrinterStart=false
+            if(isBlock(endTime)){
+                var stackTraceEntries=this.mStackSampler?.getThreadStackEntries(this.mStartTime,endTime)
+                printlnStackTraceEntries(stackTraceEntries)
+            }
+            this.mStackSampler?.stopDump()
         }
+    }
+
+    private fun isBlock(endTime:Long):Boolean{
+        return endTime-this.mStartTime> this.mBlockThresholdMillis!!
+    }
+
+    private fun printlnStackTraceEntries(stackTraceEntries:ArrayList<String>?){
+        if(stackTraceEntries==null||stackTraceEntries.size==0){
+            return
+        }
+        for(stackTraceEntry in stackTraceEntries){
+            Log.d(TAG,"##printlnStackTraceEntries##stackTraceEntries=${stackTraceEntry}")
+            Log.d(TAG,StackSampler.SEPARATOR)
+        }
+    }
+
+    fun stop(){
+        this.mStackSampler?.stop()
     }
 }
