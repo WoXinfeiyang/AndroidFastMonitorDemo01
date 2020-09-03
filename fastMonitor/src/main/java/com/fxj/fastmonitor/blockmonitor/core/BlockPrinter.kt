@@ -13,7 +13,7 @@ class BlockPrinter:Printer {
     }
 
     /**开始记录Looper.loop开启消息循环方法中输出Logging的标志位，
-     * true--开始记录,false--结束记录
+     * true--开始一次记录,false--结束一次记录
      * */
     var mPrinterStart:Boolean=false
 
