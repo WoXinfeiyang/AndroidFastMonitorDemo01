@@ -34,6 +34,7 @@ class BlockPrinter:Printer {
 
     constructor(blockThreasholderMillis:Int= DEFAULT_BLOCK_THRESHOLD_MILLIS){
         this.mBlockThresholdMillis=blockThreasholderMillis
+        Log.d(TAG,"##次构造函数##mBlockThresholdMillis=${this.mBlockThresholdMillis}")
     }
 
     override fun println(msg: String?) {
