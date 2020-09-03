@@ -44,6 +44,7 @@ class BlockMonitor private constructor(){
         }
         Looper.getMainLooper().setMessageLogging(null)
         if(this.mBlockPrinter!=null){
+            this.mBlockPrinter?.stop()
             this.mBlockPrinter=null
         }
 
