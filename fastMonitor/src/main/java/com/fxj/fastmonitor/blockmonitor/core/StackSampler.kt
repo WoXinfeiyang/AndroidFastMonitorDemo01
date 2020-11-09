@@ -23,7 +23,7 @@ class StackSampler {
         /**
          * 默认采样间隔
          * */
-        const val DEFAULT_SAMPLE_INTERVAL:Long=300L
+        const val DEFAULT_SAMPLE_INTERVAL:Long=50L
 
         /**
          * 分隔符,\r--回车,\n--换行;Linux中\n表示回车+换行；
