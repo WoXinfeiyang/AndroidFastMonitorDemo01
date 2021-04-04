@@ -6,8 +6,24 @@ buildscript {
     }
 
     repositories {
-        google()
+        //阿里云public仓库镜像
+        maven{
+            url 'https://maven.aliyun.com/repository/public'
+        }
+        //阿里云google仓库镜像
+        maven{
+            url 'https://maven.aliyun.com/repository/google'
+        }
+        //阿里云gradle-plugin仓库镜像
+        maven{
+            url 'https://maven.aliyun.com/repository/gradle-plugin'
+        }
+        //阿里云central仓库镜像
+        maven{
+            url 'https://maven.aliyun.com/repository/central'
+        }
         jcenter()
+        google()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:"+rootProject.ext.config["gradle"]
@@ -21,8 +37,24 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
+        //阿里云public仓库镜像
+        maven{
+            url 'https://maven.aliyun.com/repository/public'
+        }
+        //阿里云google仓库镜像
+        maven{
+            url 'https://maven.aliyun.com/repository/google'
+        }
+        //阿里云gradle-plugin仓库镜像
+        maven{
+            url 'https://maven.aliyun.com/repository/gradle-plugin'
+        }
+        //阿里云central仓库镜像
+        maven{
+            url 'https://maven.aliyun.com/repository/central'
+        }
         jcenter()
+        google()
     }
 }
 
