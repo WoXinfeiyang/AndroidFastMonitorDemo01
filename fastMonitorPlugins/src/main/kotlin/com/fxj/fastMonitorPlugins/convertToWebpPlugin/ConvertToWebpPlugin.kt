@@ -9,7 +9,6 @@ class ConvertToWebpPlugin :Plugin<Project> {
         val TAG= ConvertToWebpPlugin::class.java.simpleName
     }
     override fun apply(target: Project) {
-        target.getLogger().log(LogLevel.INFO, TAG,"##apply##Project=${target}")
         System.out.println(TAG +":##apply##Project=${target}");
     }
 }
