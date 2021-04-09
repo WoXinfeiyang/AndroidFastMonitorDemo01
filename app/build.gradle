@@ -3,6 +3,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from:"../config.gradle"
 
+apply plugin:"com.fxj.fastMonitorPlugins.convertToWebpPlugin"
+
+
 android {
     compileSdkVersion rootProject.ext.config["compileSdkVersion"]
     buildToolsVersion rootProject.ext.config["buildToolsVersion"]
