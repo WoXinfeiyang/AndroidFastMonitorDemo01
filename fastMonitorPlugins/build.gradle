@@ -16,6 +16,12 @@ dependencies {
     implementation gradleApi()
     implementation localGroovy()
     implementation "org.jetbrains.kotlin:kotlin-stdlib:"+rootProject.ext.config["kotlin_version"]
+
+    compileOnly "com.android.tools.build:gradle:4.0.1"
+    testCompileOnly "com.android.tools.build:gradle:4.0.1"
+
+    kapt "com.google.auto.service:auto-service:1.0-rc4"
+    implementation "com.google.auto.service:auto-service:1.0-rc4"
 }
 
 
