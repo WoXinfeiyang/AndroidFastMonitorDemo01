@@ -1,6 +1,6 @@
 package com.fxj.fastMonitorPlugins.convertToWebpPlugin
 
-data class Convert2WebpExtension(
+data class ConvertToWebpExtension(
     var enableWhenDebug:Boolean=false,
     var isCheckSize:Boolean=true,
     var whiteList:Array<String>,
