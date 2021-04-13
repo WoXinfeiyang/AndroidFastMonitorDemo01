@@ -1,8 +1,11 @@
 package com.fxj.fastMonitorPlugins.convertToWebpPlugin
 
 import com.android.build.gradle.AppExtension
+import com.android.build.gradle.api.ApplicationVariant
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import java.util.*
+import com.fxj.fastMonitorPlugins.convertToWebpPlugin.processor.VariantProcessor as VariantProcessor
 
 class ConvertToWebpPlugin :Plugin<Project> {
     companion object{
@@ -15,8 +18,18 @@ class ConvertToWebpPlugin :Plugin<Project> {
 
         if(project.plugins.hasPlugin("com.android.application")){
             var appExtension: AppExtension? =project.getExtensions().findByType(AppExtension::class.java)
-            appExtension?.applicationVariants
+            var applicationVariants:Set<ApplicationVariant> ?=appExtension?.applicationVariants
 
+            var processores= ServiceLoader.load(VariantProcessor::class.java,javaClass.classLoader).toList()
+
+            if (applicationVariants != null&& processores!=null) {
+                for(applicationVariant in applicationVariants ){
+                    for(processor in processores){
+                        System.out.println(TAG +":##apply##ApplicationVariant=${applicationVariant},VariantProcessor=${processor}");
+                        processor.process(applicationVariant)
+                    }
+                }
+            }
         }
     }
 }
