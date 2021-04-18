@@ -14,7 +14,7 @@ class ConvertToWebpPlugin :Plugin<Project> {
     override fun apply(project: Project) {
         System.out.println(TAG +":##apply##Project=${project}");
 
-        project.extensions.create("ConvertToWebpExtension",ConvertToWebpExtension::class.java)
+        project.extensions.create("convertToWebpExtension",ConvertToWebpExtension::class.java)
 
         if(project.plugins.hasPlugin("com.android.application")){
             var appExtension: AppExtension? =project.getExtensions().findByType(AppExtension::class.java)

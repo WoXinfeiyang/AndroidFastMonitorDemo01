@@ -5,6 +5,10 @@ apply from:"../config.gradle"
 
 apply plugin:"com.fxj.fastMonitorPlugins.convertToWebpPlugin"
 
+convertToWebpExtension{
+    beEnableWhenDebug true
+    beCheckSize true
+}
 
 android {
     compileSdkVersion rootProject.ext.config["compileSdkVersion"]
