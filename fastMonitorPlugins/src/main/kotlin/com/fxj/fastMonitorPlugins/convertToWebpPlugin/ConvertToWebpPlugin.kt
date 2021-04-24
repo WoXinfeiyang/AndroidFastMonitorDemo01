@@ -4,8 +4,10 @@ import com.android.build.gradle.AppExtension
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.api.ApplicationVariant
 import com.android.build.gradle.api.LibraryVariant
+import org.gradle.api.DomainObjectSet
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.internal.DefaultDomainObjectSet
 import java.util.*
 import com.fxj.fastMonitorPlugins.convertToWebpPlugin.processor.VariantProcessor as VariantProcessor
 
@@ -22,10 +24,10 @@ class ConvertToWebpPlugin :Plugin<Project> {
         System.out.println(TAG+":##apply##processores.size=${processores.size},processores=${processores}")
 
         if(project.plugins.hasPlugin("com.android.application")){
-            var appExtension: AppExtension? =project.getExtensions().findByType(AppExtension::class.java)
-            var applicationVariants:Set<ApplicationVariant> ?=appExtension?.applicationVariants
+            var appExtension=project.getExtensions().findByType(AppExtension::class.java)
+            var applicationVariants: DomainObjectSet<ApplicationVariant>?=appExtension?.applicationVariants
 
-            System.out.println(TAG+":##apply##project has com.android.application plugin,applicationVariants?.size=${applicationVariants?.size},applicationVariants=${applicationVariants}")
+            System.out.println(TAG+":##apply##project has com.android.application plugin,AppExtension=${appExtension},AppExtension ClassName=${appExtension?.javaClass?.canonicalName},applicationVariants?.size=${applicationVariants?.size},applicationVariants=${applicationVariants}")
 
             if (applicationVariants != null&& processores!=null) {
                 for(applicationVariant in applicationVariants ){
@@ -37,9 +39,9 @@ class ConvertToWebpPlugin :Plugin<Project> {
             }
         }else if(project.plugins.hasPlugin("com.android.library")){
             var libraryExtension: LibraryExtension? =project.getExtensions().findByType(LibraryExtension::class.java)
-            var libraryVariants:Set<LibraryVariant> ?=libraryExtension?.libraryVariants
+            var libraryVariants: DefaultDomainObjectSet<LibraryVariant>?=libraryExtension?.libraryVariants
 
-            System.out.println(TAG+":##apply##project has com.android.library plugin,libraryVariants?.size=${libraryVariants?.size},libraryVariants=${libraryVariants}")
+            System.out.println(TAG+":##apply##project has com.android.library plugin,LibraryExtension=${libraryExtension},LibraryExtension ClassName=${libraryExtension?.javaClass?.canonicalName},libraryVariants?.size=${libraryVariants?.size},libraryVariants=${libraryVariants}")
 
             if (libraryVariants != null&& processores!=null) {
                 for(applicationVariant in libraryVariants ){
