@@ -25,32 +25,41 @@ class ConvertToWebpPlugin :Plugin<Project> {
 
         if(project.plugins.hasPlugin("com.android.application")){
             var appExtension=project.getExtensions().findByType(AppExtension::class.java)
-            var applicationVariants: DomainObjectSet<ApplicationVariant>?=appExtension?.applicationVariants
 
-            System.out.println(TAG+":##apply##project has com.android.application plugin,AppExtension=${appExtension},AppExtension ClassName=${appExtension?.javaClass?.canonicalName},applicationVariants?.size=${applicationVariants?.size},applicationVariants=${applicationVariants}")
+            System.out.println(TAG+":##apply##project has com.android.application plugin,AppExtension=${appExtension},AppExtension ClassName=${appExtension?.javaClass?.canonicalName}")
 
-            if (applicationVariants != null&& processores!=null) {
-                for(applicationVariant in applicationVariants ){
-                    for(processor in processores){
-                        System.out.println(TAG +":##apply##ApplicationVariant=${applicationVariant},VariantProcessor=${processor}");
-                        processor.process(applicationVariant)
+            /*模块配置完成之后Project.afterEvaluate调用VariantProcessor.process方法进行处理*/
+            project.afterEvaluate{
+                var applicationVariants: DomainObjectSet<ApplicationVariant>?=appExtension?.applicationVariants
+                System.out.println(TAG+":##apply.afterEvaluate##applicationVariants?.size=${applicationVariants?.size}")
+
+                if (applicationVariants != null&& processores!=null) {
+                    for(applicationVariant in applicationVariants ){
+                        for(processor in processores){
+                            System.out.println(TAG +":##apply.afterEvaluate##ApplicationVariant=${applicationVariant},VariantProcessor=${processor}");
+                            processor.process(applicationVariant)
+                        }
                     }
                 }
             }
+
         }else if(project.plugins.hasPlugin("com.android.library")){
             var libraryExtension: LibraryExtension? =project.getExtensions().findByType(LibraryExtension::class.java)
-            var libraryVariants: DefaultDomainObjectSet<LibraryVariant>?=libraryExtension?.libraryVariants
 
-            System.out.println(TAG+":##apply##project has com.android.library plugin,LibraryExtension=${libraryExtension},LibraryExtension ClassName=${libraryExtension?.javaClass?.canonicalName},libraryVariants?.size=${libraryVariants?.size},libraryVariants=${libraryVariants}")
+            System.out.println(TAG+":##apply##project has com.android.library plugin,LibraryExtension=${libraryExtension},LibraryExtension ClassName=${libraryExtension?.javaClass?.canonicalName}")
 
-            if (libraryVariants != null&& processores!=null) {
-                for(applicationVariant in libraryVariants ){
-                    for(processor in processores){
-                        System.out.println(TAG +":##apply##ApplicationVariant=${applicationVariant},VariantProcessor=${processor}");
-                        processor.process(applicationVariant)
+            project.afterEvaluate {
+                var libraryVariants: DefaultDomainObjectSet<LibraryVariant>?=libraryExtension?.libraryVariants
+                if (libraryVariants != null&& processores!=null) {
+                    for(applicationVariant in libraryVariants ){
+                        for(processor in processores){
+                            System.out.println(TAG +":##apply##ApplicationVariant=${applicationVariant},VariantProcessor=${processor}");
+                            processor.process(applicationVariant)
+                        }
                     }
                 }
             }
+
         }
     }
 }
