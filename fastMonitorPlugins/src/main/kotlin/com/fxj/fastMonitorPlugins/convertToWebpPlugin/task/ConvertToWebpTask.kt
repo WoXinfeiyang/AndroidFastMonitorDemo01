@@ -3,7 +3,7 @@ package com.fxj.fastMonitorPlugins.convertToWebpPlugin.task
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
-class ConvertToWebpTask:DefaultTask() {
+open class ConvertToWebpTask:DefaultTask() {
 
     companion object{
         val TAG:String=ConvertToWebpTask::class.java.simpleName
