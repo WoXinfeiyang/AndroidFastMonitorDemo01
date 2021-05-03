@@ -4,6 +4,7 @@ import com.android.build.gradle.AppExtension
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.api.ApplicationVariant
 import com.android.build.gradle.api.LibraryVariant
+import com.fxj.fastMonitorPlugins.convertToWebpPlugin.task.convertToWebp.ConvertToWebpExtension
 import org.gradle.api.DomainObjectSet
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -18,7 +19,7 @@ class ConvertToWebpPlugin :Plugin<Project> {
     override fun apply(project: Project) {
         System.out.println(TAG +":##apply##Project=${project}");
 
-        project.extensions.create("convertToWebpExtension",ConvertToWebpExtension::class.java)
+        project.extensions.create("convertToWebpExtension", ConvertToWebpExtension::class.java)
 
         var processores= ServiceLoader.load(VariantProcessor::class.java,javaClass.classLoader).toList()
         System.out.println(TAG+":##apply##processores.size=${processores.size},processores=${processores}")

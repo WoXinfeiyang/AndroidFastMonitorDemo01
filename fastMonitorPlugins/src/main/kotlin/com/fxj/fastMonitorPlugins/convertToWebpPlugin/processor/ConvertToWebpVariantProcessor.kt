@@ -1,10 +1,9 @@
 package com.fxj.fastMonitorPlugins.convertToWebpPlugin.processor
 
-import com.android.build.api.variant.impl.ApplicationVariantImpl
 import com.android.build.gradle.api.BaseVariant
 import com.android.build.gradle.internal.variant.ApkVariantData
 import com.android.build.gradle.tasks.MergeResources
-import com.fxj.fastMonitorPlugins.convertToWebpPlugin.task.ConvertToWebpTask
+import com.fxj.fastMonitorPlugins.convertToWebpPlugin.task.convertToWebp.ConvertToWebpTask
 import com.google.auto.service.AutoService
 import org.gradle.api.Task
 

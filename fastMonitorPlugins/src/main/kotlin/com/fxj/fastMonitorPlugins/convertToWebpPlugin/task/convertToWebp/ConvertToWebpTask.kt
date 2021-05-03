@@ -1,18 +1,17 @@
-package com.fxj.fastMonitorPlugins.convertToWebpPlugin.task
+package com.fxj.fastMonitorPlugins.convertToWebpPlugin.task.convertToWebp
 
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.LibraryExtension
-import com.fxj.fastMonitorPlugins.convertToWebpPlugin.ConvertToWebpExtension
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
 open class ConvertToWebpTask:DefaultTask() {
 
     companion object{
-        val TAG:String=ConvertToWebpTask::class.java.simpleName
+        val TAG:String= ConvertToWebpTask::class.java.simpleName
     }
 
-    var convertToWebpExtension:ConvertToWebpExtension?=null
+    var convertToWebpExtension: ConvertToWebpExtension?=null
 
     @TaskAction
     fun doAction(){
@@ -30,7 +29,8 @@ open class ConvertToWebpTask:DefaultTask() {
             project.extensions.findByType(LibraryExtension::class.java)?.libraryVariants
         }
 
-        System.out.println(TAG+": ##doAction##ConvertToWebpExtension=${convertToWebpExtension}," +
+        System.out.println(
+            TAG +": ##doAction##ConvertToWebpExtension=${convertToWebpExtension}," +
                 "hasAppPlugin=${hasAppPlugin},variants item type=${if(variants==null||variants?.size<1) null else variants.iterator().next()::class.java.canonicalName}")
 
     }
