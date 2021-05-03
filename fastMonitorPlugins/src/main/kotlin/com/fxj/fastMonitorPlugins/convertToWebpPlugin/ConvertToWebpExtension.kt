@@ -5,7 +5,6 @@ open class ConvertToWebpExtension{
     var open:Boolean=false
     var beCheckSize:Boolean=true
     var whiteList:Array<String>?=null
-    var bigImageWhiteList:Array<String>?=null
     var cwebpToolsDir:String?=null
     var maxSize:Float= (500 * 1024).toFloat()
 
@@ -13,13 +12,11 @@ open class ConvertToWebpExtension{
         beOpen:Boolean,
         isCheckSize:Boolean,
         argWhiteList:Array<String>?=null,
-        argBigImageWhiteList:Array<String>?=null,
         argCwebpToolsDir:String?=null,
         argMaxSize:Float=(500 * 1024).toFloat()){
         this.open=beOpen
         this.beCheckSize=isCheckSize
         this.whiteList=argWhiteList
-        this.bigImageWhiteList=argBigImageWhiteList
         this.cwebpToolsDir=argCwebpToolsDir
         this.maxSize=argMaxSize
     }
@@ -30,7 +27,7 @@ open class ConvertToWebpExtension{
     }
 
     override fun toString(): String {
-        return "ConvertToWebpExtension(open=$open, beCheckSize=$beCheckSize, whiteList=${whiteList?.contentToString()}, bigImageWhiteList=${bigImageWhiteList?.contentToString()}, cwebpToolsDir=$cwebpToolsDir, maxSize=$maxSize)"
+        return "ConvertToWebpExtension(open=$open, beCheckSize=$beCheckSize, whiteList=${whiteList?.contentToString()}, cwebpToolsDir=$cwebpToolsDir, maxSize=$maxSize)"
     }
 
 
