@@ -6,7 +6,7 @@ apply from:"../config.gradle"
 apply plugin:"com.fxj.fastMonitorPlugins.convertToWebpPlugin"
 
 convertToWebpExtension{
-    beEnableWhenDebug true
+    open true
     beCheckSize true
 }
 

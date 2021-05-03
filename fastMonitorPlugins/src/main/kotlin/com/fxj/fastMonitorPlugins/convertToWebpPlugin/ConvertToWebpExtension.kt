@@ -2,7 +2,7 @@ package com.fxj.fastMonitorPlugins.convertToWebpPlugin
 
 open class ConvertToWebpExtension{
 
-    var beEnableWhenDebug:Boolean=false
+    var open:Boolean=false
     var beCheckSize:Boolean=true
     var whiteList:Array<String>?=null
     var bigImageWhiteList:Array<String>?=null
@@ -10,13 +10,13 @@ open class ConvertToWebpExtension{
     var maxSize:Float= (500 * 1024).toFloat()
 
     constructor(
-        enableWhenDebug:Boolean,
+        beOpen:Boolean,
         isCheckSize:Boolean,
         argWhiteList:Array<String>?=null,
         argBigImageWhiteList:Array<String>?=null,
         argCwebpToolsDir:String?=null,
         argMaxSize:Float=(500 * 1024).toFloat()){
-        this.beEnableWhenDebug=enableWhenDebug
+        this.open=beOpen
         this.beCheckSize=isCheckSize
         this.whiteList=argWhiteList
         this.bigImageWhiteList=argBigImageWhiteList
@@ -28,4 +28,10 @@ open class ConvertToWebpExtension{
     constructor(){
 
     }
+
+    override fun toString(): String {
+        return "ConvertToWebpExtension(open=$open, beCheckSize=$beCheckSize, whiteList=${whiteList?.contentToString()}, bigImageWhiteList=${bigImageWhiteList?.contentToString()}, cwebpToolsDir=$cwebpToolsDir, maxSize=$maxSize)"
+    }
+
+
 }
