@@ -6,6 +6,8 @@ open class ConvertToWebpExtension{
     var beCheckSize:Boolean=true
     var whiteList:Array<String>?=null
     var cwebpToolsDir:String?=null
+    /**压缩比*/
+    var mCompressionFactor:Long=75L
     var maxSize:Float= (500 * 1024).toFloat()
 
     constructor(
@@ -13,11 +15,13 @@ open class ConvertToWebpExtension{
         isCheckSize:Boolean,
         argWhiteList:Array<String>?=null,
         argCwebpToolsDir:String?=null,
+        compressionFactor:Long=75L,
         argMaxSize:Float=(500 * 1024).toFloat()){
         this.open=beOpen
         this.beCheckSize=isCheckSize
         this.whiteList=argWhiteList
         this.cwebpToolsDir=argCwebpToolsDir
+        this.mCompressionFactor=compressionFactor
         this.maxSize=argMaxSize
     }
 
@@ -27,7 +31,7 @@ open class ConvertToWebpExtension{
     }
 
     override fun toString(): String {
-        return "ConvertToWebpExtension(open=$open, beCheckSize=$beCheckSize, whiteList=${whiteList?.contentToString()}, cwebpToolsDir=$cwebpToolsDir, maxSize=$maxSize)"
+        return "ConvertToWebpExtension(open=$open, beCheckSize=$beCheckSize, whiteList=${whiteList?.contentToString()}, cwebpToolsDir=$cwebpToolsDir,mCompressionFactor=$mCompressionFactor,maxSize=$maxSize)"
     }
 
 
