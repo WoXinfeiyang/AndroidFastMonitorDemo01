@@ -14,7 +14,7 @@ class ConvertToWebpVariantProcessor:VariantProcessor {
         val TAG=ConvertToWebpVariantProcessor::class.java.simpleName
     }
     override fun process(variant: BaseVariant) {
-        System.out.println(TAG+": ##process##variant=${variant}")
+        System.out.println(TAG+": ##process##variant=${variant},ConvertToWebpVariantProcessor=${this}")
         var variantData: ApkVariantData =(variant as com.android.build.gradle.internal.api.ApplicationVariantImpl).variantData
 
         var tasks=variantData.getScope().getGlobalScope().getProject().getTasks()
