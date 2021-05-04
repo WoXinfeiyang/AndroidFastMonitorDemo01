@@ -16,7 +16,8 @@ open class ConvertToWebpTask:DefaultTask() {
     }
 
     var convertToWebpExtension: ConvertToWebpExtension?=null
-
+    var preConvertFilesTotalLength=0L
+    var afterConvertFileTotalLength=0L
     @TaskAction
     fun doAction(){
 
@@ -59,13 +60,17 @@ open class ConvertToWebpTask:DefaultTask() {
 
             System.out.println(TAG+": ##doAction##imageFileList.size=${imageFileList.size},imageFileNameList.size=${imageFileNameList.size}")
 
-            var preCovertFilesTotalLength=0L
+
             for(imageFile in imageFileList){
-                preCovertFilesTotalLength+=imageFile.length()
-                System.out.println(TAG+": ##doAction##imageFile.absolutePath=${imageFile.absolutePath},imageFile.length=${imageFile.length()}Byte,preCovertFilesTotalLength=${preCovertFilesTotalLength}Byte")
+                preConvertFilesTotalLength+=imageFile.length()
+                System.out.println(TAG+": ##doAction##imageFile.absolutePath=${imageFile.absolutePath},imageFile.length=${imageFile.length()}Byte,preCovertFilesTotalLength=${preConvertFilesTotalLength}Byte")
             }
 
             dispatchCovertTask(imageFileList)
+
+            System.out.println(TAG+": ##doAction##Before convert to webp,all image resSize=${preConvertFilesTotalLength/1024}kb")
+            System.out.println(TAG+": ##doAction##After convert to webp,all image resSize=${afterConvertFileTotalLength/1024}kb")
+            System.out.println(TAG+": ##doAction##After convert to webp,optimize image resSize=${(preConvertFilesTotalLength-afterConvertFileTotalLength)/1024}kb")
         }
 
     }
@@ -140,8 +145,23 @@ open class ConvertToWebpTask:DefaultTask() {
     }
 
     private fun convertImage(imageFile:File?){
-
+        val path=imageFile?.path?:null
         ConvertToWebpUtils.instance.convertToWebp(imageFile,convertToWebpExtension?.mCompressionFactor?:null)
+        calcNewSize(path)
+    }
 
+    private fun calcNewSize(path: String?){
+        path?.let {
+            if(File(it).exists()){
+                afterConvertFileTotalLength+=File(it).length()
+            }else{
+                val webpFilePath=path.substring(0,it.lastIndexOf(".",))+".webp"
+                if(File(webpFilePath).exists()){
+                    afterConvertFileTotalLength+=File(webpFilePath).length()
+                }else{
+                    System.out.println(TAG+": ##calcNewSize##convertToWebp task wrong!")
+                }
+            }
+        }
     }
 }
