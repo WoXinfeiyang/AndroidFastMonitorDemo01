@@ -59,4 +59,18 @@ class ConvertToWebpUtils {
 
         return result
     }
+
+    fun isImageFile(file:File):Boolean{
+        var result:Boolean=false
+        val fileName=file.name
+
+        if((fileName.endsWith(".jpg")
+                    || fileName.endsWith(".png")
+                    || fileName.endsWith(".jpeg"))
+            && !fileName.endsWith(".9.png")){
+            result=true
+        }
+
+        return result
+    }
 }

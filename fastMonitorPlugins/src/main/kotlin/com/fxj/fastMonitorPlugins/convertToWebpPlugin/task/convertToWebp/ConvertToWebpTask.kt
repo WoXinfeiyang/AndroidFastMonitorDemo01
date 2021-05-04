@@ -4,6 +4,7 @@ import com.android.build.gradle.AppExtension
 import com.android.build.gradle.LibraryExtension
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
+import java.io.File
 
 open class ConvertToWebpTask:DefaultTask() {
 
@@ -42,6 +43,60 @@ open class ConvertToWebpTask:DefaultTask() {
 
         if(!checkCwebpToolState){
             return
+        }
+
+        variants?.all{variant->
+            val resFiles=variant.allRawAndroidResources.files
+            val imageFileList=ArrayList<File>()
+            val imageFileNameList=ArrayList<String>()
+
+            for(resFile in resFiles){
+                traverseResFile(resFile,imageFileList,imageFileNameList)
+            }
+
+            System.out.println(TAG+": ##doAction##imageFileList.size=${imageFileList.size},imageFileNameList.size=${imageFileNameList.size}")
+
+            var preCovertFilesTotalLength=0L
+            for(imageFile in imageFileList){
+                preCovertFilesTotalLength+=imageFile.length()
+                System.out.println(TAG+": ##doAction##imageFile.absolutePath=${imageFile.absolutePath},imageFile.length=${imageFile.length()}Byte,preCovertFilesTotalLength=${preCovertFilesTotalLength}Byte")
+            }
+
+
+        }
+
+    }
+
+    private fun traverseResFile(resFile:File?, shouldCovertImageFiles:ArrayList<File>?, shouldCovertImageFileNameList:ArrayList<String>?){
+        if(resFile==null||shouldCovertImageFiles==null||shouldCovertImageFileNameList==null){
+            return
+        }
+
+        if(!resFile.isDirectory){
+            filterImageRes(resFile,shouldCovertImageFiles,shouldCovertImageFileNameList)
+        }else{
+            resFile.listFiles()
+            for(file in resFile.listFiles()){
+                if(file.isDirectory){
+                    traverseResFile(file,shouldCovertImageFiles,shouldCovertImageFileNameList)
+                }else{
+                    filterImageRes(file,shouldCovertImageFiles,shouldCovertImageFileNameList)
+                }
+            }
+        }
+    }
+
+    private fun filterImageRes(file:File, imageFiles:ArrayList<File>?, imageFileNameList:ArrayList<String>?){
+        if(file==null||imageFiles==null||imageFileNameList==null){
+            return
+        }
+        if(imageFileNameList?.contains(file.absolutePath)){
+            return
+        }
+
+        if(ConvertToWebpUtils.instance.isImageFile(file)&&!(convertToWebpExtension?.whiteList?.contains(file.name)?:false)&&!imageFileNameList.contains(file.absolutePath)){
+            imageFiles.add(file)
+            imageFileNameList.add(file.absolutePath)
         }
 
     }
