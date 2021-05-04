@@ -94,7 +94,7 @@ class ConvertToWebpUtils {
         }
 
         var webpFile:File=File(imageFile.path.substring(0,imageFile.path.lastIndexOf("."))+".webp")
-
+        /*参考链接:https://developers.google.com/speed/webp/docs/cwebp*/
         var cwebpCmdStr="cwebp -q "+(if(quality!=null) quality else 75)+" ${imageFile.path} -o ${webpFile.path}"
         cwebpCmd(cwebpCmdStr)
 
