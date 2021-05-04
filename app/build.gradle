@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from:"../config.gradle"
 
-apply plugin:"com.fxj.fastMonitorPlugins.convertToWebpPlugin"
+apply plugin:"com.fxj.fastMonitorPlugins"
 
 convertToWebpExtension{
     open true
