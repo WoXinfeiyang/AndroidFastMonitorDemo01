@@ -3,7 +3,11 @@ package com.fxj.fastMonitorPlugins.convertToWebp
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import java.io.File
-
+/*
+参考资料:
+<p>https://developers.google.com/speed/webp/docs/cwebp
+<p>https://developer.android.com/studio/write/convert-webp
+*/
 
 class ConvertToWebpUtils {
 
