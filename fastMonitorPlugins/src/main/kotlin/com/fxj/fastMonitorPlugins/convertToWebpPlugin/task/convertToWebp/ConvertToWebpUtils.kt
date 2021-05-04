@@ -73,4 +73,41 @@ class ConvertToWebpUtils {
 
         return result
     }
+
+    fun cwebpCmd(param:String?){
+
+        if(this.cwebpToolPath==null||(this.cwebpToolPath?.isBlank()?:true)||param==null||param.isBlank()){
+            return
+        }
+
+        val systemPlatform = System.getProperty("os.name")
+        val cmdStr=this.cwebpToolPath+" ${param}"
+        System.out.println(TAG+": ##cwebpCmd##cmdStr=${cmdStr}")
+        val process = Runtime.getRuntime().exec(cmdStr)
+        process.waitFor()
+    }
+
+    fun convertToWebp(imageFile:File?,quality:Long?=null){
+        if(imageFile==null||!isImageFile(imageFile)){
+            return
+        }
+
+        var webpFile:File=File(imageFile.path.substring(0,imageFile.path.lastIndexOf("."))+".webp")
+
+        var cwebpCmdStr="cwebp -q "+(if(quality!=null) quality else 75)+" ${imageFile.path} -o ${webpFile.path}"
+        cwebpCmd(cwebpCmdStr)
+
+        System.out.println(TAG+": ##convertToWebp##imageFile.length=${imageFile.length()},webpFile.length=${webpFile.length()}," +
+                "imageFile.absolutePath=${imageFile.absolutePath},webpFile.absolutePath=${webpFile.absolutePath}")
+
+        if(webpFile.length()<imageFile.length()){
+            if(imageFile.exists()){
+                imageFile.delete()
+            }
+        }else{
+            if(webpFile.exists()){
+                webpFile.delete()
+            }
+        }
+    }
 }
