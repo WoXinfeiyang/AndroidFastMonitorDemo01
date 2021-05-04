@@ -29,7 +29,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:"+rootProject.ext.config["gradle"]
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:"+rootProject.ext.config["kotlin_version"]
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:"+rootProject.ext.config["kotlin_version"]
-        classpath "com.fxj.fastMonitorPlugins:convertToWebpPlugin:latest"
+        classpath "com.fxj.fastMonitorPlugins:fastMonitorPlugins:latest"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

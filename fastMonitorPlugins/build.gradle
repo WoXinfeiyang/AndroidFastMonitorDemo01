@@ -26,7 +26,7 @@ dependencies {
 
 
 String GROUP="com.fxj.fastMonitorPlugins"
-String ARTIFACTID="convertToWebpPlugin"
+String ARTIFACTID="fastMonitorPlugins"
 String VERSION="latest"
 
 uploadArchives {
