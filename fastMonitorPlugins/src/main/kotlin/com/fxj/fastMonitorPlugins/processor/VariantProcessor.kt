@@ -1,4 +1,4 @@
-package com.fxj.fastMonitorPlugins.convertToWebpPlugin.processor
+package com.fxj.fastMonitorPlugins.processor
 import com.android.build.gradle.api.BaseVariant
 
 

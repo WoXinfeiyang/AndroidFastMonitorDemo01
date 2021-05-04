@@ -1,4 +1,4 @@
-package com.fxj.fastMonitorPlugins.convertToWebpPlugin.task.convertToWebp
+package com.fxj.fastMonitorPlugins.convertToWebp
 
 open class ConvertToWebpExtension{
 

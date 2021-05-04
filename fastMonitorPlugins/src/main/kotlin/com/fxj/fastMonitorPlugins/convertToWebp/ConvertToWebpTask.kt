@@ -1,4 +1,4 @@
-package com.fxj.fastMonitorPlugins.convertToWebpPlugin.task.convertToWebp
+package com.fxj.fastMonitorPlugins.convertToWebp
 
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.LibraryExtension
@@ -41,9 +41,9 @@ open class ConvertToWebpTask:DefaultTask() {
         ConvertToWebpUtils.instance.init(project)
         ConvertToWebpUtils.instance.setCwebpToolPath(convertToWebpExtension?.cwebpToolsRootDir)
 
-        var checkCwebpToolState=ConvertToWebpUtils.instance.checkCwebpTool()
+        var checkCwebpToolState= ConvertToWebpUtils.instance.checkCwebpTool()
 
-        System.out.println(TAG+": ##doAction##ConvertToWebpUtils.cwebpToolPath=${ConvertToWebpUtils.instance.cwebpToolPath},checkCwebpToolState=${checkCwebpToolState}")
+        System.out.println(TAG +": ##doAction##ConvertToWebpUtils.cwebpToolPath=${ConvertToWebpUtils.instance.cwebpToolPath},checkCwebpToolState=${checkCwebpToolState}")
 
         if(!checkCwebpToolState){
             return
@@ -58,19 +58,19 @@ open class ConvertToWebpTask:DefaultTask() {
                 traverseResFile(resFile,imageFileList,imageFileNameList)
             }
 
-            System.out.println(TAG+": ##doAction##imageFileList.size=${imageFileList.size},imageFileNameList.size=${imageFileNameList.size}")
+            System.out.println(TAG +": ##doAction##imageFileList.size=${imageFileList.size},imageFileNameList.size=${imageFileNameList.size}")
 
 
             for(imageFile in imageFileList){
                 preConvertFilesTotalLength+=imageFile.length()
-                System.out.println(TAG+": ##doAction##imageFile.absolutePath=${imageFile.absolutePath},imageFile.length=${imageFile.length()}Byte,preCovertFilesTotalLength=${preConvertFilesTotalLength}Byte")
+                System.out.println(TAG +": ##doAction##imageFile.absolutePath=${imageFile.absolutePath},imageFile.length=${imageFile.length()}Byte,preCovertFilesTotalLength=${preConvertFilesTotalLength}Byte")
             }
 
             dispatchCovertTask(imageFileList)
 
-            System.out.println(TAG+": ##doAction##Before convert to webp,all image resSize=${preConvertFilesTotalLength/1024}kb")
-            System.out.println(TAG+": ##doAction##After convert to webp,all image resSize=${afterConvertFileTotalLength/1024}kb")
-            System.out.println(TAG+": ##doAction##After convert to webp,optimize image resSize=${(preConvertFilesTotalLength-afterConvertFileTotalLength)/1024}kb")
+            System.out.println(TAG +": ##doAction##Before convert to webp,all image resSize=${preConvertFilesTotalLength/1024}kb")
+            System.out.println(TAG +": ##doAction##After convert to webp,all image resSize=${afterConvertFileTotalLength/1024}kb")
+            System.out.println(TAG +": ##doAction##After convert to webp,optimize image resSize=${(preConvertFilesTotalLength-afterConvertFileTotalLength)/1024}kb")
         }
 
     }
@@ -138,7 +138,7 @@ open class ConvertToWebpTask:DefaultTask() {
                 try{
                     taskResult.get()
                 }catch (e:Exception){
-                    System.out.println(TAG+": ##dispatchCovertTask##Exception.message=${e.message}")
+                    System.out.println(TAG +": ##dispatchCovertTask##Exception.message=${e.message}")
                 }
             }
         }
@@ -159,7 +159,7 @@ open class ConvertToWebpTask:DefaultTask() {
                 if(File(webpFilePath).exists()){
                     afterConvertFileTotalLength+=File(webpFilePath).length()
                 }else{
-                    System.out.println(TAG+": ##calcNewSize##convertToWebp task wrong!")
+                    System.out.println(TAG +": ##calcNewSize##convertToWebp task wrong!")
                 }
             }
         }

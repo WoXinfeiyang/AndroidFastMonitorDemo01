@@ -1,4 +1,4 @@
-package com.fxj.fastMonitorPlugins.convertToWebpPlugin.task.convertToWebp
+package com.fxj.fastMonitorPlugins.convertToWebp
 
 import org.gradle.api.GradleException
 import org.gradle.api.Project
@@ -8,9 +8,9 @@ import java.io.File
 class ConvertToWebpUtils {
 
     companion object{
-        val TAG=ConvertToWebpUtils::class.java.simpleName
+        val TAG= ConvertToWebpUtils::class.java.simpleName
 
-        val instance:ConvertToWebpUtils by lazy(LazyThreadSafetyMode.SYNCHRONIZED){
+        val instance: ConvertToWebpUtils by lazy(LazyThreadSafetyMode.SYNCHRONIZED){
             ConvertToWebpUtils()
         }
     }
@@ -43,7 +43,8 @@ class ConvertToWebpUtils {
 
         }
 
-        System.out.println(TAG+": ##setCwebpToolPath##cwebpToolsDir=${cwebpToolsRootDir}," +
+        System.out.println(
+            TAG +": ##setCwebpToolPath##cwebpToolsDir=${cwebpToolsRootDir}," +
                 "result=${result},systemPlatform=${systemPlatform}")
 
         this.cwebpToolPath=result.toString()
@@ -82,7 +83,7 @@ class ConvertToWebpUtils {
 
         val systemPlatform = System.getProperty("os.name")
         val cmdStr=this.cwebpToolPath+" ${param}"
-        System.out.println(TAG+": ##cwebpCmd##cmdStr=${cmdStr}")
+        System.out.println(TAG +": ##cwebpCmd##cmdStr=${cmdStr}")
         val process = Runtime.getRuntime().exec(cmdStr)
         process.waitFor()
     }
@@ -97,7 +98,8 @@ class ConvertToWebpUtils {
         var cwebpCmdStr="cwebp -q "+(if(quality!=null) quality else 75)+" ${imageFile.path} -o ${webpFile.path}"
         cwebpCmd(cwebpCmdStr)
 
-        System.out.println(TAG+": ##convertToWebp##imageFile.length=${imageFile.length()},webpFile.length=${webpFile.length()}," +
+        System.out.println(
+            TAG +": ##convertToWebp##imageFile.length=${imageFile.length()},webpFile.length=${webpFile.length()}," +
                 "imageFile.absolutePath=${imageFile.absolutePath},webpFile.absolutePath=${webpFile.absolutePath}")
 
         if(webpFile.length()<imageFile.length()){
