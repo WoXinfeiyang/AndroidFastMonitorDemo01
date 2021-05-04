@@ -33,5 +33,16 @@ open class ConvertToWebpTask:DefaultTask() {
             TAG +": ##doAction##ConvertToWebpExtension=${convertToWebpExtension}," +
                 "hasAppPlugin=${hasAppPlugin},variants item type=${if(variants==null||variants?.size<1) null else variants.iterator().next()::class.java.canonicalName}")
 
+        ConvertToWebpUtils.instance.init(project)
+        ConvertToWebpUtils.instance.setCwebpToolPath(convertToWebpExtension?.cwebpToolsRootDir)
+
+        var checkCwebpToolState=ConvertToWebpUtils.instance.checkCwebpTool()
+
+        System.out.println(TAG+": ##doAction##ConvertToWebpUtils.cwebpToolPath=${ConvertToWebpUtils.instance.cwebpToolPath},checkCwebpToolState=${checkCwebpToolState}")
+
+        if(!checkCwebpToolState){
+            return
+        }
+
     }
 }
