@@ -5,6 +5,9 @@ import com.android.build.gradle.LibraryExtension
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 import java.io.File
+import java.util.concurrent.Callable
+import java.util.concurrent.Executors
+import java.util.concurrent.Future
 
 open class ConvertToWebpTask:DefaultTask() {
 
@@ -62,7 +65,7 @@ open class ConvertToWebpTask:DefaultTask() {
                 System.out.println(TAG+": ##doAction##imageFile.absolutePath=${imageFile.absolutePath},imageFile.length=${imageFile.length()}Byte,preCovertFilesTotalLength=${preCovertFilesTotalLength}Byte")
             }
 
-
+            dispatchCovertTask(imageFileList)
         }
 
     }
@@ -98,6 +101,47 @@ open class ConvertToWebpTask:DefaultTask() {
             imageFiles.add(file)
             imageFileNameList.add(file.absolutePath)
         }
+
+    }
+
+    private fun dispatchCovertTask(imageFileList:ArrayList<File>?){
+        if(imageFileList==null||imageFileList.size<1){
+            return
+        }
+        val processorsNum=Runtime.getRuntime().availableProcessors()
+        if(imageFileList.size<processorsNum){
+            for(imageFile in imageFileList){
+                convertImage(imageFile)
+            }
+        }else{
+            val taskResultList=ArrayList<Future<Unit>>()
+            val pool= Executors.newFixedThreadPool(processorsNum)
+            val partNum=imageFileList.size/processorsNum
+
+            for(i in 0 until processorsNum){
+                val from=i*partNum
+                val to=if(i==processorsNum-1) imageFileList.size-1 else (i+1)*partNum-1
+
+                taskResultList.add(pool.submit(Callable<Unit>{
+                    for(index in from..to){
+                        convertImage(imageFileList[index])
+                    }
+                }))
+            }
+
+            for(taskResult in taskResultList){
+                try{
+                    taskResult.get()
+                }catch (e:Exception){
+                    System.out.println(TAG+": ##dispatchCovertTask##Exception.message=${e.message}")
+                }
+            }
+        }
+    }
+
+    private fun convertImage(imageFile:File?){
+
+        ConvertToWebpUtils.instance.convertToWebp(imageFile,convertToWebpExtension?.mCompressionFactor?:null)
 
     }
 }
