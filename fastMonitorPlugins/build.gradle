@@ -17,11 +17,11 @@ dependencies {
     implementation localGroovy()
     implementation "org.jetbrains.kotlin:kotlin-stdlib:"+rootProject.ext.config["kotlin_version"]
 
-    compileOnly "com.android.tools.build:gradle:4.0.1"
-    testCompileOnly "com.android.tools.build:gradle:4.0.1"
+    compileOnly "com.android.tools.build:gradle:"+rootProject.ext.config["gradle"]
+    testCompileOnly "com.android.tools.build:gradle:"+rootProject.ext.config["gradle"]
 
-    kapt "com.google.auto.service:auto-service:1.0-rc4"
-    implementation "com.google.auto.service:auto-service:1.0-rc4"
+    kapt "com.google.auto.service:auto-service:"+rootProject.ext.config["auto_service"]
+    implementation "com.google.auto.service:auto-service:"+rootProject.ext.config["auto_service"]
 }
 
 
